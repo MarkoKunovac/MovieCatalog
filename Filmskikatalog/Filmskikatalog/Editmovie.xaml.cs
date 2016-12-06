@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Filmskikatalog
 {
     /// <summary>
-    /// Interaction logic for AddMovie.xaml
+    /// Interaction logic for Editmovie.xaml
     /// </summary>
-    public partial class AddMovie : Window
+    public partial class Editmovie : Window
     {
-        public AddMovie()
+        public Editmovie()
         {
             InitializeComponent();
         }

@@ -12,14 +12,14 @@
             <ColumnDefinition Width="12*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Height="25" Margin="288,10,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.488,0.56"/>
-        <Button x:Name="button1" Content="Exit" HorizontalAlignment="Left" Height="22" Margin="417,278,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2" Click="button1_Click"/>
+        <Button x:Name="button1" Content="Exit" HorizontalAlignment="Left" Height="22" Margin="417,278,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2" Click="Exit_Click"/>
         <Button x:Name="button2" Content="Delete" HorizontalAlignment="Left" Height="22" Margin="417,215,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
-        <Button x:Name="button3" Content="Edit" HorizontalAlignment="Left" Height="22" Margin="308,215,0,0" VerticalAlignment="Top" Width="90"/>
-        <Button x:Name="button4" Content="Add" HorizontalAlignment="Left" Height="22" Margin="198,215,0,0" VerticalAlignment="Top" Width="90" Click="button4_Click"/>
+        <Button x:Name="button3" Content="Edit" HorizontalAlignment="Left" Height="22" Margin="308,215,0,0" VerticalAlignment="Top" Width="90" Click="Edit_Click"/>
+        <Button x:Name="button4" Content="Add" HorizontalAlignment="Left" Height="22" Margin="198,215,0,0" VerticalAlignment="Top" Width="90" Click="Add_Click"/>
         <Button x:Name="button5" Content="Import" HorizontalAlignment="Left" Height="22" Margin="23,278,0,0" VerticalAlignment="Top" Width="90"/>
         <Button x:Name="button6" Content="Export" HorizontalAlignment="Left" Height="22" Margin="136,278,0,0" VerticalAlignment="Top" Width="90"/>
         <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="25" Margin="53,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="210"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="145" Margin="53,55,0,0" VerticalAlignment="Top" Width="433" IsReadOnly="True"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="145" Margin="53,55,0,0" VerticalAlignment="Top" Width="433" IsReadOnly="True" ColumnWidth="*"/>
 
     </Grid>
 </Window>

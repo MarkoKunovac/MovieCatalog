@@ -26,13 +26,17 @@ namespace Filmskikatalog
             dataGrid.ItemsSource = Film.getMovie();
         }
 
-        private void button4_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddMovie win2 = new AddMovie();
             win2.Show();
         }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Editmovie win2 = new Editmovie();
+            win2.Show();
+        }
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
