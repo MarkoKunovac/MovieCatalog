@@ -26,7 +26,6 @@ namespace Filmskikatalog
             InitializeComponent();
             dataGrid.ItemsSource = Film.getMovie();
         }
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddMovie win2 = new AddMovie();
