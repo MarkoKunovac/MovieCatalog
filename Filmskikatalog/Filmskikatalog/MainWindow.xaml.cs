@@ -21,15 +21,22 @@ namespace Filmskikatalog
     /// 
     public partial class MainWindow : Window
     {
+        List<Film> movies;
         public MainWindow()
         {
             InitializeComponent();
-            dataGrid.ItemsSource = Film.getMovie();
+            movies = Film.getMovie();
+            dataGrid.ItemsSource = movies;
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddMovie win2 = new AddMovie();
-            win2.Show();
+            bool val = win2.ShowDialog().Value;
+            if (val == true)
+            {
+                movies.Add(win2.Film);
+                dataGrid.Items.Refresh();
+            }
         }
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
@@ -43,7 +50,23 @@ namespace Filmskikatalog
             {
                 Application.Current.Shutdown();
             }
-            //gfdsgfgfdgdfg
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if
+       (dataGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Nothing is selected", "Error", MessageBoxButton.OK);
+            }
+            else
+            {
+                var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    movies.Remove((Film)dataGrid.SelectedItem);
+                }
+            }
         }
     }
 }

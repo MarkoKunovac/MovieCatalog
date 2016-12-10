@@ -19,13 +19,26 @@ namespace Filmskikatalog
     /// </summary>
     public partial class AddMovie : Window
     {
+        public Film Film { get; set; }
         public AddMovie()
         {
             InitializeComponent();
         }
+
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             Close();
-    }
+        }
+
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            Film = new Film();
+            Film.Name = nameBox.Text;
+            Film.Genre = genreComboBox.Text;
+            Film.Director = directorBox.Text;
+            DialogResult = true;
+            Close();
+        }
     }
 }

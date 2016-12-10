@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Filmskikatalog
 {
-    class Film
+    public enum MovieTypeEnum
+    {
+        Action,
+        Fantasy,
+        Scifi,
+        Thriller
+    }
+    public class Film
     {
         public string Name { get; set;}
         public string Genre { get; set; }
