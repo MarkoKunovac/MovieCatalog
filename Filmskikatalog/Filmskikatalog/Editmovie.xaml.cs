@@ -27,5 +27,12 @@ namespace Filmskikatalog
         {
             Close();
         }
+        public List<MovieTypeEnum> Genres
+        {
+            get
+            {
+                return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
+            }
+        }
     }
 }

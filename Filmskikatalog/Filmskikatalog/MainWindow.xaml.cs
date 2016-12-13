@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Filmskikatalog
     /// 
     public partial class MainWindow : Window
     {
-        List<Film> movies;
+        ObservableCollection<Film> movies;
         public MainWindow()
         {
             InitializeComponent();
@@ -66,6 +67,31 @@ namespace Filmskikatalog
                 {
                     movies.Remove((Film)dataGrid.SelectedItem);
                 }
+            }
+        }
+
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
+
+            Import.DefaultExt = ".xml";
+            Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
+
+            Nullable<bool> result = Import.ShowDialog();
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
+            SaveFile.FileName = "Movies";
+            SaveFile.DefaultExt = ".xml"; // Default file extension
+            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
+
+            // Process save file dialog box results
+            if (SaveFile.ShowDialog() == true)
+            {
+                // Save
+                string filename = SaveFile.FileName;
             }
         }
     }

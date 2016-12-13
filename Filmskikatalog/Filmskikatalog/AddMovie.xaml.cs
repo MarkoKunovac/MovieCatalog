@@ -19,6 +19,7 @@ namespace Filmskikatalog
     /// </summary>
     public partial class AddMovie : Window
     {
+        public DateTime dates;
         public Film Film { get; set; }
         public AddMovie()
         {
@@ -35,10 +36,19 @@ namespace Filmskikatalog
         {
             Film = new Film();
             Film.Name = nameBox.Text;
-            Film.Genre = genreComboBox.Text;
+            Film.Genre = (MovieTypeEnum)genreComboBox.SelectedItem;
             Film.Director = directorBox.Text;
+            Film.ReleaseDate = dataPicker.SelectedDate.Value;
             DialogResult = true;
             Close();
+        }
+        public List<MovieTypeEnum> Genres
+        {
+            get
+            {
+                return Enum.GetValues(typeof(MovieTypeEnum)).Cast<MovieTypeEnum>().ToList<MovieTypeEnum>();
+
+            }
         }
     }
 }
