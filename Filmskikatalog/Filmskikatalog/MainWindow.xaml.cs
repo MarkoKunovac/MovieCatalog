@@ -41,7 +41,7 @@ namespace Filmskikatalog
         }
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            Editmovie win2 = new Editmovie();
+            Editmovie win2 = new Editmovie((Film)dataGrid.SelectedItem);
             win2.Show();
         }
         private void Exit_Click(object sender, RoutedEventArgs e)

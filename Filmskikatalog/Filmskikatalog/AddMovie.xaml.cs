@@ -23,6 +23,7 @@ namespace Filmskikatalog
         public Film Film { get; set; }
         public AddMovie()
         {
+            Film = new Film();
             InitializeComponent();
         }
 
@@ -34,11 +35,6 @@ namespace Filmskikatalog
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            Film = new Film();
-            Film.Name = nameBox.Text;
-            Film.Genre = (MovieTypeEnum)genreComboBox.SelectedItem;
-            Film.Director = directorBox.Text;
-            Film.ReleaseDate = dataPicker.SelectedDate.Value;
             DialogResult = true;
             Close();
         }

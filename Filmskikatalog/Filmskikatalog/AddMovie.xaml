@@ -11,11 +11,11 @@
         <Button x:Name="Button" Content="OK" HorizontalAlignment="Left" Margin="50,239,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.493,0.5" Height="24" Click="Ok_Click"/>
         <Button x:Name="button" Content="Cancel" HorizontalAlignment="Left" Margin="162,239,0,0" VerticalAlignment="Top" Width="90" Height="24" Click="Cancel_Click"/>
         <TextBlock x:Name="textBox" HorizontalAlignment="Left" Height="25" Margin="62,21,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Width="46"/>
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="25" Margin="123,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="25" Margin="123,21,0,0" TextWrapping="Wrap" Text="{Binding Film.Name}" VerticalAlignment="Top" Width="140"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="25" Margin="62,70,0,0" TextWrapping="Wrap" Text="Genre:" VerticalAlignment="Top" Width="46"/>
         <ComboBox x:Name="genreComboBox" HorizontalAlignment="Left" Height="25" Margin="123,70,0,0" VerticalAlignment="Top" Width="140"  ItemsSource="{Binding Genres}"/>
         <TextBlock x:Name="textBox2" HorizontalAlignment="Left" Height="25" Margin="50,120,0,0" TextWrapping="Wrap" Text="Director:" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="directorBox" HorizontalAlignment="Left" Height="25" Margin="123,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name="directorBox" HorizontalAlignment="Left" Height="25" Margin="123,120,0,0" TextWrapping="Wrap" Text="{Binding Film.Director}" VerticalAlignment="Top" Width="140"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="25" Margin="34,178,0,0" TextWrapping="Wrap" Text="Release Date:" VerticalAlignment="Top" Width="74"/>
         <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Margin="123,178,0,0" VerticalAlignment="Top" Width="140" Height="25"/>
     </Grid>
