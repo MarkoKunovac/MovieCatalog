@@ -17,6 +17,6 @@
         <TextBlock x:Name="textBox2" HorizontalAlignment="Left" Height="25" Margin="50,120,0,0" TextWrapping="Wrap" Text="Director:" VerticalAlignment="Top" Width="60"/>
         <TextBox x:Name="directorBox" HorizontalAlignment="Left" Height="25" Margin="123,120,0,0" TextWrapping="Wrap" Text="{Binding Film.Director}" VerticalAlignment="Top" Width="140"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Height="25" Margin="34,178,0,0" TextWrapping="Wrap" Text="Release Date:" VerticalAlignment="Top" Width="74"/>
-        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Margin="123,178,0,0" VerticalAlignment="Top" Width="140" Height="25"/>
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Margin="123,178,0,0" VerticalAlignment="Top" Width="140" Height="25" SelectedDate="{Binding Film.ReleaseDate }"/>
     </Grid>
 </Window>
