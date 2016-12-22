@@ -59,8 +59,7 @@ namespace Filmskikatalog
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Film.Genre = (MovieTypeEnum)comboBox.SelectedItem;
-
-            //_oldMovie = CopyProperties(Film);
+            Close();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged(
