@@ -19,7 +19,7 @@ namespace Filmskikatalog
         public string Name { get; set;}
         public MovieTypeEnum Genre { get; set; }
         public string Director { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; } 
         public static ObservableCollection<Film> getMovie()
         {
             var movie = new ObservableCollection<Film>();
@@ -28,6 +28,19 @@ namespace Filmskikatalog
             movie.Add(new Film() { Name = "Gilmors girls", Genre = MovieTypeEnum.Scifi, Director = "Ivan Peric", ReleaseDate = new DateTime(2018, 1, 1) });
             movie.Add(new Film() { Name = "Scrubs", Genre = MovieTypeEnum.Thriller, Director = "Oliver Sipos", ReleaseDate = new DateTime(2018, 1 , 1) });
             return movie;
+        }
+
+        public Film()
+        {
+
+        }
+
+        public Film(Film film)
+        {
+            Name = film.Name;
+            Genre = film.Genre;
+            Director = film.Director;
+            ReleaseDate = film.ReleaseDate;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Filmskikatalog"
         mc:Ignorable="d"
-        Title="EditMovie" Height="300" Width="300"
+        Title="EditMovie" Height="300" Width="300" ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button x:Name="Button" Content="OK" HorizontalAlignment="Left" Margin="50,239,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.493,0.5" Height="24" Click="Ok_Click"/>

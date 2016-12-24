@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Filmskikatalog
 {
@@ -80,12 +83,31 @@ namespace Filmskikatalog
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
+                Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
+                Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
 
-            Import.DefaultExt = ".xml";
-            Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
+                if (Import.ShowDialog() == true)
+                {
+                    string impext = System.IO.Path.GetExtension(Import.FileName);
 
-            Nullable<bool> result = Import.ShowDialog();
+                    if (impext.Equals(".xml"))
+                    {
+                        XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Film>));
+
+                        using (StreamReader reader = new StreamReader(Import.FileName))
+                        {
+                            movies = (ObservableCollection<Film>)x.Deserialize(reader);
+                            dataGrid.ItemsSource = movies;
+                        }
+                    }
+                    else if (impext.Equals(".json"))
+                    {
+                        string jsonimp = File.ReadAllText(Import.FileName);
+
+                        ObservableCollection<Film> data = JsonConvert.DeserializeObject<ObservableCollection<Film>>(jsonimp);
+                        movies = data;
+                    }
+                }
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
@@ -100,6 +122,27 @@ namespace Filmskikatalog
             {
                 // Save
                 string filename = SaveFile.FileName;
+                // izvlacenje extenzije (ubaci u if else)
+
+                string ext = System.IO.Path.GetExtension(filename);
+
+                // Serializer
+                if (ext.Equals(".xml"))
+                {
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Film>));
+
+                    using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
+                    {
+                        serializer.Serialize(writer, movies);
+                    }
+                }
+                else if (ext == ".json")
+                {
+                    string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
+
+                    File.WriteAllText(filename, json);
+                }
             }
         }
     }

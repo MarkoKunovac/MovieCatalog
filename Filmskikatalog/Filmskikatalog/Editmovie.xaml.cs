@@ -36,17 +36,33 @@ namespace Filmskikatalog
                 RaisePropertyChanged();
             }
         }
+    
         public Editmovie(Film movie)
         {
+
             DataContext = this;
             _oldMovie = movie;
-            Film = movie;
+            Film = new Film(movie);
 
             InitializeComponent();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            var Ok = MessageBox.Show("Are you want to Close", "WPF Application", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (Ok == MessageBoxResult.Yes)
+            {
+                _oldMovie.Name = Film.Name;
+                _oldMovie.Genre = Film.Genre;
+                _oldMovie.Director = Film.Director;
+                _oldMovie.ReleaseDate = Film.ReleaseDate;
+                this.Close();
+            }
+            else
+            {
+
+            }
+
         }
         public List<MovieTypeEnum> Genres
         {
