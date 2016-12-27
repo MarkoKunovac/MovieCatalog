@@ -145,5 +145,20 @@ namespace Filmskikatalog
                 }
             }
         }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            string text = TextBox.Text;
+            ObservableCollection<Film> filtered = new ObservableCollection<Film>();
+            foreach (var movie in movies)
+            {
+                if(movie.Name.StartsWith(text) || movie.Genre.ToString().StartsWith(text))
+                {
+                    filtered.Add(movie);
+                }
+            }
+
+            dataGrid.ItemsSource = filtered;
+        }
     }
 }
