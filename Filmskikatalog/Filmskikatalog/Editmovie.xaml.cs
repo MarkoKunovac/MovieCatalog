@@ -36,7 +36,7 @@ namespace Filmskikatalog
                 RaisePropertyChanged();
             }
         }
-    
+
         public Editmovie(Film movie)
         {
 
@@ -47,23 +47,11 @@ namespace Filmskikatalog
             InitializeComponent();
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            var Ok = MessageBox.Show("Are you want to Close", "WPF Application", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-            if (Ok == MessageBoxResult.Yes)
-            {
-                _oldMovie.Name = Film.Name;
-                _oldMovie.Genre = Film.Genre;
-                _oldMovie.Director = Film.Director;
-                _oldMovie.ReleaseDate = Film.ReleaseDate;
-                this.Close();
-            }
-            else
-            {
-
+            { 
+            Close();
             }
 
-        }
         public List<MovieTypeEnum> Genres
         {
             get
