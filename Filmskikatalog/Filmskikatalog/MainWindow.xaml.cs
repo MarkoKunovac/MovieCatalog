@@ -25,20 +25,52 @@ namespace Filmskikatalog
     /// 
     public partial class MainWindow : Window
     {
+        FilmContext ctx;
+
         ObservableCollection<Film> movies;
+        ObservableCollection<Film> Movies
+        {
+            get
+            {
+                string text = TextBox.Text;
+                if (string.IsNullOrEmpty(text))
+                    return movies;
+
+                ObservableCollection<Film> filtered = new ObservableCollection<Film>();
+                foreach (var movie in movies)
+                {
+                    if (movie.Name.StartsWith(text) || movie.Genre.ToString().StartsWith(text))
+                    {
+                        filtered.Add(movie);
+                    }
+                }
+                return filtered;
+            }
+            set
+            {
+                movies = value;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
-            movies = Film.getMovie();
-            dataGrid.ItemsSource = movies;
+
+            ctx = new FilmContext();
+
+
+            //Movies = Film.getMovie();
+            Movies = new ObservableCollection<Film>(ctx.Filmovi);
+
+            dataGrid.ItemsSource = Movies;
         }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddMovie win2 = new AddMovie();
             bool val = win2.ShowDialog().Value;
             if (val == true)
             {
-                movies.Add(win2.Film);
+                Movies.Add(win2.Film);
                 dataGrid.Items.Refresh();
             }
         }
@@ -76,89 +108,52 @@ namespace Filmskikatalog
                 var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    movies.Remove((Film)dataGrid.SelectedItem);
+                    Movies.Remove((Film)dataGrid.SelectedItem);
                 }
             }
         }
-
-        private void Import_Click(object sender, RoutedEventArgs e)
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
-                Microsoft.Win32.OpenFileDialog Import = new Microsoft.Win32.OpenFileDialog();
-                Import.Filter = "XML Files (*.xml)|*.xml|JSON Files (*.json)|*.json";
+            //Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
+            //SaveFile.FileName = "Movies";
+            //SaveFile.DefaultExt = ".xml"; // Default file extension
+            //SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
 
-                if (Import.ShowDialog() == true)
-                {
-                    string impext = System.IO.Path.GetExtension(Import.FileName);
+            //// Process save file dialog box results
+            //if (SaveFile.ShowDialog() == true)
+            //{
+            //    // Save
+            //    string filename = SaveFile.FileName;
+            //    // izvlacenje extenzije (ubaci u if else)
 
-                    if (impext.Equals(".xml"))
-                    {
-                        XmlSerializer x = new XmlSerializer(typeof(ObservableCollection<Film>));
+            //    string ext = System.IO.Path.GetExtension(filename);
 
-                        using (StreamReader reader = new StreamReader(Import.FileName))
-                        {
-                            movies = (ObservableCollection<Film>)x.Deserialize(reader);
-                            dataGrid.ItemsSource = movies;
-                        }
-                    }
-                    else if (impext.Equals(".json"))
-                    {
-                        string jsonimp = File.ReadAllText(Import.FileName);
+            //    // Serializer
+            //    if (ext.Equals(".xml"))
+            //    {
 
-                        ObservableCollection<Film> data = JsonConvert.DeserializeObject<ObservableCollection<Film>>(jsonimp);
-                        movies = data;
-                    }
-                }
-        }
+            //        XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Film>));
 
-        private void Export_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.SaveFileDialog SaveFile = new Microsoft.Win32.SaveFileDialog();
-            SaveFile.FileName = "Movies";
-            SaveFile.DefaultExt = ".xml"; // Default file extension
-            SaveFile.Filter = "XML Files (.xml)|*.xml|JSON Files (*.json)|*.json"; // Filter by extension
+            //        using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
+            //        {
+            //            serializer.Serialize(writer, Movies);
+            //        }
+            //    }
+            //    else if (ext == ".json")
+            //    {
+            //        string json = JsonConvert.SerializeObject(Movies, Formatting.Indented);
 
-            // Process save file dialog box results
-            if (SaveFile.ShowDialog() == true)
-            {
-                // Save
-                string filename = SaveFile.FileName;
-                // izvlacenje extenzije (ubaci u if else)
+            //        File.WriteAllText(filename, json);
+            //    }
+            //}
 
-                string ext = System.IO.Path.GetExtension(filename);
-
-                // Serializer
-                if (ext.Equals(".xml"))
-                {
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Film>));
-
-                    using (FileStream writer = new FileStream(filename, FileMode.OpenOrCreate))
-                    {
-                        serializer.Serialize(writer, movies);
-                    }
-                }
-                else if (ext == ".json")
-                {
-                    string json = JsonConvert.SerializeObject(movies, Formatting.Indented);
-
-                    File.WriteAllText(filename, json);
-                }
-            }
+            ctx.SaveChanges();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            string text = TextBox.Text;
-            ObservableCollection<Film> filtered = new ObservableCollection<Film>();
-            foreach (var movie in movies)
-            {
-                if(movie.Name.StartsWith(text) || movie.Genre.ToString().StartsWith(text))
-                {
-                    filtered.Add(movie);
-                }
-            }
-
-            dataGrid.ItemsSource = filtered;
+            dataGrid.ItemsSource = null;
+            dataGrid.ItemsSource = Movies;
         }
     }
 }
