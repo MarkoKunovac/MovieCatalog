@@ -33,10 +33,15 @@ namespace Filmskikatalog
 
         public Film()
         {
-
+            ReleaseDate = DateTime.Now;
         }
 
         public Film(Film film)
+        {
+            CopyProperties(film);
+        }
+
+        public void CopyProperties(Film film)
         {
             Name = film.Name;
             Genre = film.Genre;

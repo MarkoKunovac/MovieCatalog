@@ -63,6 +63,7 @@ namespace Filmskikatalog
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Film.Genre = (MovieTypeEnum)comboBox.SelectedItem;
+            DialogResult = true;
             Close();
         }
         public event PropertyChangedEventHandler PropertyChanged;

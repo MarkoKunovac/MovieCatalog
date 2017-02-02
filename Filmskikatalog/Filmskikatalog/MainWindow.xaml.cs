@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,7 @@ namespace Filmskikatalog
             bool val = win2.ShowDialog().Value;
             if (val == true)
             {
+                ctx.Filmovi.Add(win2.Film);
                 Movies.Add(win2.Film);
                 dataGrid.Items.Refresh();
             }
@@ -83,8 +85,13 @@ namespace Filmskikatalog
             }
             else
             {
-                Editmovie win2 = new Editmovie((Film)dataGrid.SelectedItem);
-                win2.Show();
+                Film selected = (Film)dataGrid.SelectedItem;
+                Editmovie win2 = new Editmovie(selected);
+                if(win2.ShowDialog().Value == true)
+                {
+                    selected.CopyProperties(win2.Film);
+                    Refresh();
+                }
             }
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -108,6 +115,7 @@ namespace Filmskikatalog
                 var result = MessageBox.Show("Are you sure you want to proceed?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
+                    ctx.Filmovi.Remove((Film)dataGrid.SelectedItem);
                     Movies.Remove((Film)dataGrid.SelectedItem);
                 }
             }
@@ -151,6 +159,11 @@ namespace Filmskikatalog
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        public void Refresh()
         {
             dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = Movies;
